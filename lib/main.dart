@@ -1,38 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:splashscreen/splashscreen.dart';
+import 'package:flutter_notes/helper/note_provider.dart';
+import 'package:flutter_notes/screens/note_edit_screen.dart';
+import 'package:flutter_notes/screens/note_list_screen.dart';
+import 'package:flutter_notes/screens/note_view_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(new MaterialApp(
-    home: new MyApp(),
-  ));
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => new _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new SplashScreen(
-        seconds: 10,
-        navigateAfterSeconds: new AfterSplash(),
-        title: new Text('Usama.  ' 'FA17-BSE-049'),
-        image: new Image.asset('image.jpeg'),
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
-        loaderColor: Colors.grey);
+    return ChangeNotifierProvider.value(
+      value: NoteProvider(),
+      child: MaterialApp(
+        title: "Flutter Notes",
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => NoteListScreen(),
+          NoteViewScreen.route: (context) => NoteViewScreen(),
+          NoteEditScreen.route: (context) => NoteEditScreen(),
+        },
+      ), //MaterialApp
+    ); //ChangeNotifierProvider.value
   }
 }
-
-class AfterSplash extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'final project app',
-      theme: ThemeData(primarySwatch: Colors.red),
-    );
-  }
 }

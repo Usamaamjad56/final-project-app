@@ -1,0 +1,80 @@
+ import 'package:flutter/material.dart';
+ import 'package:flutter_notes/helper/note_provider.dart';
+ import 'package:provider/provider.dart';
+
+ class NoteListScreen extends StateLessWidget  {
+
+  @override
+   Widget build(BuildContext context) {
+    return FutureBuilder(
+     future: Provider.of<NoteProvider>(context,listen: false).getNotes(),
+      builder: (context,snapshot)
+      {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ), // Center
+          ); //Scarffold
+        }else
+          {
+            return Container(
+
+          }
+
+      },
+      }; // FutureBuilder
+     }
+
+     Widget header()
+     {
+       Widget header() {
+
+                 return GestureDetector(
+                 onTop: launchUrl,
+                  child: Container{
+                   decoration: BoxDecoration(
+                   color: headerColor,
+                   borderRadius: BorderRadius.only(
+                   bottomRight: Radius.circular(75.0))
+                              }, // BoerderRadius.only
+                              }, // BoxDecoration
+                              height: 150.0,
+                              width: double.infinity,
+                              child: Column {
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text{
+                                   'ANDRIODRIDE\*S',
+                                   // Text
+                                    style: headerRideStyle,
+                                   },
+                                    Text{
+                                     'Notes',
+                                      style: headerRideStyle,
+
+                                      } // Text
+                                      'No // text tes',
+                                     s // Columnstyle: headerNotesStyle,
+
+                                  }
+                               ],
+                              },
+                              }, // Column
+                              ), //Container
+                              }; // GestureDetector
+
+     }
+
+     void_launchUrl() async {
+
+     const url = 'https://www.androidride.com';
+     if(await canLaunch(url))  {
+       await launch(url);
+     }
+     else {
+      'throw could not launch $url';
+
+     }
+    }
+   }
