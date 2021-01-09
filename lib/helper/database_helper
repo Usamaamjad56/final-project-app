@@ -15,5 +15,24 @@ import 'package:sqflite/sqflite.dart';
 
           return database.query("notes", orderBy: "id DESC");
           }
+       {
+
+         Future deleteNote(int id) {
+           _items.removeWhere((element) => element.id == id);
+           notifyListeners();
+           return DatabaseHelper.delete(id);
+         }
+
+        actionDeleteID:(
+
+          static Future delete(int id) async {
+            final database = await DatabaseHelper.database();
+            return database.delete('notes', where: 'id = ?', whereArgs: [id]);
+          }
+
+
+        ), // actionDeleteID
+       },
        }
+
   }
